@@ -14,7 +14,7 @@
         box-shadow: 0 2px 1px #9c9c9c;
 	 }
 
-#menu li{
+	 #menu li{
         float: left;
         padding: 0 0 10px 0;
         position: relative;
@@ -148,19 +148,18 @@
     border-bottom: 8px solid #444;
 						   }
 
-						 
-body{
-	
-    background-image: url(images_projet/fond.jpg);
-	background-repeat: no-repeat;
-    background-position; center;
-	background-size: cover ;
-	
-	}
-						   
-header{
-		
-	  }
- 
 
+html { 
+  margin:0;
+  padding:0;
+  background: url(images_projet/hugofond.jpeg) no-repeat center fixed; 
+  background-size: cover;
+}
+
+h1{
+		color: #D2EC65 ;
+		text-align: center;
+		height: 10px;
+		width: 80 ;
+	  }
 
