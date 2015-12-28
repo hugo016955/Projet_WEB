@@ -1,0 +1,204 @@
+/* Ensemble de la page HTML qui est parent de toutes les balises et qui transmet donc son hérédité à toutes ces autres balises */
+html
+{
+    font-family: "Helvetica";   /* Appel de la fonte annexe */
+}
+
+
+/* Fond d'ecran */
+#background
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 46px;   /* 46px étant la largeur du menu */
+    left: 0;
+}
+
+
+/* Contenu */
+body
+{
+    margin: 0 !important;   /* Pour que cette propriété soit prioritaire (à utiliser avec modération) */
+}
+
+
+/* Titre de l'accueil */
+#title
+{
+    left: 50%;
+    padding-top: 10px;
+    position: absolute;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+/* Menu */
+nav
+{
+    font-family: "Hemmet";   /* Appel de la fonte annexe */
+    z-index: 999;   /* Pour que l'image en fond d'ecran ne cache pas le menu */
+    width: 100%;
+    background-color: orange;
+    position: fixed;   /* Pour que le menu soit toujours visible même lorsque l'on déroule la page */
+}
+
+
+nav ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    zoom: 1;
+    display: inline !important;   /* Pour que le menu soit en mode honrizontal */
+}
+
+
+/* Tous les items du menu */
+nav ul li
+{
+    display: inline-block;
+    margin: 0;
+    width: 19%;
+    text-align: center;
+}
+
+
+nav ul li a
+{
+    color: #ffffff;
+    text-decoration: none;   /* Pour enlever le soulignement des liens de menu */
+    display: block;
+    padding: 5px 0 5px 0;
+    font-weight: bold;
+    font-size: 30px;
+    position: relative;
+    -webkit-transition: color .25s;
+    -moz-transition: color .25s;
+    -ms-transition: color .25s;
+    -o-transition: color .25s;
+    transition: color .25s;
+}
+
+
+nav ul li a:hover
+{
+    color: #333333;   /* Pour que les lien de menu change de couleur au survol */
+}
+
+
+/* Pour l'animation au survol */
+nav ul li a:hover:before
+{
+    width: 100%;
+}
+
+
+/* Animation du menu */
+nav ul li a:before
+{
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background: #333333;
+    -webkit-transition: width .5s;   /* Pour les navigateurs Chrome, Safari et Android notamment */
+    -moz-transition: width .5s;   /* Pour Mozilla */
+    -ms-transition: width .5s;   /* Pour Internet Explorer */
+    -o-transition: width .5s;   /* Pour Opera */
+    transition: width .5s;
+}
+
+
+/* Mise en évidence de l'onglet actif */
+nav ul li.active a
+{
+    color: #333333 !important;
+
+}
+
+
+nav ul li.active a:before
+{
+    width: 100%;
+}
+
+
+/* RESPONSIVE DESIGN -- Modifications faites lorsque la taille de l'écran est inférieur à 726px en largeur */
+@media screen and (max-width: 726px)
+{
+    nav ul li
+    {
+        text-align: center !important;
+        float: none;
+        display: block;
+        width: 100%;
+    }
+    #background
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 230px;
+        left: 0;
+    }
+}
+
+
+/* Sous menu */
+nav ul ul
+{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none !important;
+    position: absolute;
+    top: 35px;
+    left: 0;
+    z-index: 99999;
+    background: #444;
+    background: -moz-linear-gradient(#444, #111);
+    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
+    background: -webkit-linear-gradient(#444, #111);
+    background: -o-linear-gradient(#444, #111);
+    background: -ms-linear-gradient(#444, #111);
+    background: linear-gradient(#444, #111);
+
+}
+
+nav ul li ul a
+{
+    padding: 10px;
+    height: auto;
+    line-height: 1;
+    display: block;
+    white-space: nowrap;
+    float: none;
+    text-transform: none;
+}
+
+nav ul li ul a:hover
+{
+    background: #0186ba;
+    background: -moz-linear-gradient(#04acec,  #0186ba);
+    background: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
+    background: -webkit-linear-gradient(#04acec,  #0186ba);
+    background: -o-linear-gradient(#04acec,  #0186ba);
+    background: -ms-linear-gradient(#04acec,  #0186ba);
+    background: linear-gradient(#04acec,  #0186ba);
+}
+
+/* Importation de fonte annexe */
+@font-face
+{
+    font-family: "Hemmet";
+    src: url('../font/Hemmet.ttf');
+}
+
+
+
+
