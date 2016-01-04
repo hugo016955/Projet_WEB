@@ -1,7 +1,5 @@
 <!DOCTYPE html>
 <html>
-	
-	<h1 id="title">Les motos</h1>
 
 	<head>
     	<meta charset="UTF-8">
@@ -10,24 +8,47 @@
     </head>
 
 	<nav>
+		<button class="c-hamburger c-hamburger--htx" role="button">
+			<span></span>
+		</button>
 		<ul>
    			<li class="active"><a href='index.html'>Accueil</a></li>
    			<li><a href='html/sommaire.html'>Sommaire</a></li>
-   			<li><a href='html/differents_types.html'>Types</a></li>
-   				<ul>     
-            		<li><a href="html/enduro.html">Enduro</a></li>
-            		<li><a href="html/cross.html">Cross</a></li>
-            		<li><a href="html/sportive.html">Sportive</a></li>
-            		<li><a href="html/supermotard.html">Supermotard</a></li>
-    			</ul>
-   			<li><a href='html/differentes_marques.html'>Marques</a></li>
-   			<li class="last"><a href='html/presentation.html'>Présentation</a></li>
+   			<li><a href='html/types.html'>Types</a></li>
+   			<li><a href='html/marques.html'>Marques</a></li>
+   			<li><a href='html/presentation.html'>Présentation</a></li>
 		</ul>
+		<form id="search" action="" method="GET">
+			<input id="searchBar" name="" size="40" type="text" placeholder="Rechercher... "/>
+			<input id="searchButton" value="Search" type="submit"/>
+		</form>
 	</nav>
 
 	<body>
 		<img id="background" src="img/background.jpeg"/>   <!-- Insertion de l'image en fond d'écran -->
 	</body>
-	
+
+	<script>
+		(function()
+		{
+			"use strict";
+			var toggles = document.querySelectorAll(".c-hamburger, div");
+			for (var i = toggles.length - 1; i >= 0; i--)
+			{
+				var toggle = toggles[i];
+				toggleHandler(toggle);
+			};
+
+			function toggleHandler(toggle)
+			{
+				toggle.addEventListener( "click", function(e)
+				{
+					e.preventDefault();
+					(this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+				});
+			}
+		})();
+	</script>
+
 </html>
 

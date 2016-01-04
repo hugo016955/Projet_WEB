@@ -1,36 +1,57 @@
-/* Ensemble de la page HTML qui est parent de toutes les balises et qui transmet donc son hérédité à toutes ces autres balises */
+/* Ensemble de la page HTML qui est parent de toutes les balises et qui transmet donc son hérédité à toute ces autres balises */
 html
 {
-    font-family: "Helvetica";   /* Appel de la fonte annexe */
+    font-family: "Helvetica";
 }
 
+/* Importation de fonte annexe */
+@font-face
+{
+    font-family: "Hemmet";
+    src: url('../font/Hemmet.ttf');
+}
+
+*   /* concerne tous les éléments HTML */
+{
+    outline: none !important;   /* Pour enlever les bords circonscrit lors du click */
+    box-sizing: border-box !important;   /* Pour que le padding, la margin et la border n'augmente pas la taille des éléments */
+    text-decoration: none !important;   /* Pour enlever le soulignement des liens de menu */
+}
 
 /* Fond d'ecran */
 #background
 {
+    top: 52px;
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 46px;   /* 46px étant la largeur du menu */
     left: 0;
+    transition: 1s;
 }
 
 
 /* Contenu */
 body
 {
-    margin: 0 !important;   /* Pour que cette propriété soit prioritaire (à utiliser avec modération) */
+   /* position: relative; */
+   /* top: 52px;   /* 52px étant la hauteur du menu */
+   /* margin: 3%; */
+    box-shadow: 0 0 10px 1px ghostwhite;
+    background-color: ghostwhite;
 }
 
-
-/* Titre de l'accueil */
-#title
+p
 {
-    left: 50%;
-    padding-top: 10px;
-    position: absolute;
-    font-size: 30px;
-    font-weight: bold;
+    word-wrap: break-word;
+}
+
+div
+{
+    display: block;
+    width: 100%;
+	position: relative ;
+	top: 52px;
+	margin: 3%;
 }
 
 
@@ -40,18 +61,26 @@ nav
     font-family: "Hemmet";   /* Appel de la fonte annexe */
     z-index: 999;   /* Pour que l'image en fond d'ecran ne cache pas le menu */
     width: 100%;
-    background-color: orange;
+    height: 52px;
+    background-color: #333;
     position: fixed;   /* Pour que le menu soit toujours visible même lorsque l'on déroule la page */
+    left: 0;
+    top: 0 !important;
+    box-shadow: 0 0 10px 3px #333;
+    font-size: 0;   /* Pour enlever les whitespace */
+    transition: 1s;
 }
 
 
 nav ul
 {
+    margin: 0 0 0 70px;
     list-style: none;
-    margin: 0;
     padding: 0;
     zoom: 1;
-    display: inline !important;   /* Pour que le menu soit en mode honrizontal */
+    display: inline-block !important;   /* Pour que le menu soit en mode honrizontal */
+    text-align: center;
+    height: 52px;
 }
 
 
@@ -60,31 +89,32 @@ nav ul li
 {
     display: inline-block;
     margin: 0;
-    width: 19%;
+    width: auto;
     text-align: center;
 }
 
-
 nav ul li a
 {
-    color: #ffffff;
-    text-decoration: none;   /* Pour enlever le soulignement des liens de menu */
-    display: block;
-    padding: 5px 0 5px 0;
+    color: ghostwhite;
+    padding: 11px 17px;
     font-weight: bold;
     font-size: 30px;
     position: relative;
-    -webkit-transition: color .25s;
-    -moz-transition: color .25s;
-    -ms-transition: color .25s;
-    -o-transition: color .25s;
-    transition: color .25s;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s;
+    line-height: 52px;   /* Pour pouvoir utiliser la propriété vertical-align */
+    vertical-align: middle;
 }
 
 
 nav ul li a:hover
 {
-    color: #333333;   /* Pour que les lien de menu change de couleur au survol */
+    color: #333;   /* Pour que les lien de menu change de couleur au survol */
+    background-color: #FF8C00;
+    transition: none;
 }
 
 
@@ -95,30 +125,16 @@ nav ul li a:hover:before
 }
 
 
-/* Animation du menu */
-nav ul li a:before
-{
-    content: "";
-    display: block;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 3px;
-    width: 0;
-    background: #333333;
-    -webkit-transition: width .5s;   /* Pour les navigateurs Chrome, Safari et Android notamment */
-    -moz-transition: width .5s;   /* Pour Mozilla */
-    -ms-transition: width .5s;   /* Pour Internet Explorer */
-    -o-transition: width .5s;   /* Pour Opera */
-    transition: width .5s;
-}
-
-
 /* Mise en évidence de l'onglet actif */
 nav ul li.active a
 {
-    color: #333333 !important;
+    color: #FF8C00;
 
+}
+
+nav ul li.active a:hover
+{
+    background-color: #333;
 }
 
 
@@ -127,77 +143,384 @@ nav ul li.active a:before
     width: 100%;
 }
 
-
-/* RESPONSIVE DESIGN -- Modifications faites lorsque la taille de l'écran est inférieur à 726px en largeur */
-@media screen and (max-width: 726px)
+/* MENU HAMBURGER */
+.c-hamburger
 {
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    font-size: 0;
+    border: none;
+    cursor: pointer;   /* Pour que le curseur soit sous forme de main */
+    transition: box-shadow 1s;
+    top: 1px;
+    left: 1px;
+    z-index: 1000000 !important;   /* On utilise "!important" pour que cette propriété soit prioritaire (à utiliser avec modération) */
+    box-shadow: 0 0 3px #FF8C00, 0 0 0 #FF8C00, 0 0 0 #FF8C00;
+    margin: 0 !important;
+}
+
+.c-hamburger span
+{
+    display: block;
+    position: absolute;
+    top: 23px;
+    left: 13px;
+    right: 13px;
+    height: 3px;
+    background: #FF8C00;
+}
+
+.c-hamburger--htx span:hover, .c-hamburger--htx span::before:hover, .c-hamburger--htx span::after:hover
+{
+    background-color: #333 !important;
+}
+
+.c-hamburger span::before, .c-hamburger span::after
+{
+    position: absolute;
+    display: block;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #FF8C00;
+    content: "";
+}
+
+.c-hamburger span::before
+{
+    top: -10px;
+}
+
+.c-hamburger span::after
+{
+    bottom: -10px;
+}
+
+
+
+.c-hamburger--htx
+{
+    background-color: #333;
+    transition: all 1s;
+}
+
+.c-hamburger--htx:hover
+{
+    background-color: #444;
+    transition: none;
+    box-shadow: 0 0 5px #FF8C00, 0 0 5px #FF8C00, 0 0 5px #FF8C00;
+}
+
+.c-hamburger--htx.is-active:hover
+{
+    background-color: #444;
+    transition: background-color 0s;
+    box-shadow: 0 0 5px #FF8C00, 0 0 5px #FF8C00, 0 0 5px #FF8C00;
+}
+
+.c-hamburger--htx span
+{
+    transition: background 0s 0.5s;   /* pour enlever la bare du milieu quand le menu se transforme en croix */
+}
+
+.c-hamburger--htx span::before, .c-hamburger--htx span::after
+{
+    transition-duration: 0.5s, 0.5s;   /* Durée des 2 transitions respectivement */
+    transition-delay: 0.5s, 0s;
+}
+
+.c-hamburger--htx span::before
+{
+    transition-property: top, transform;
+}
+
+.c-hamburger--htx span::after
+{
+    transition-property: bottom, transform;
+}
+
+.c-hamburger--htx.is-active
+{
+    transition: all 1s;
+    background-color: #333;
+}
+
+.c-hamburger--htx.is-active span
+{
+    background: none;
+}
+
+.c-hamburger--htx.is-active span::before
+{
+    top: 0;
+    transform: rotate(45deg);
+}
+
+.c-hamburger--htx.is-active span::after
+{
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+.c-hamburger--htx.is-active span::before, .c-hamburger--htx.is-active span::after
+{
+    transition-delay: 0s, 0.5s;   /* Délai pour former la croix à l'ouverture du menu */
+}
+
+
+/* Barre de recherche */
+#searchBar
+{
+    position: fixed;
+    z-index: 1000000;
+    top: 60px;
+    left: 5px;
+    background: #eee;
+    padding: 10px;
+    border-radius: 10px 0 0 10px;
+    -moz-border-radius: 10px 0 0 10px;
+    -webkit-border-radius: 10px 0 0 10px;
+    -o-border-radius: 10px 0 0 10px;
+    border: 0 none;
+    width: 160px;
+    transition: 1s;
+    height: 35px;
+}
+
+#searchButton
+{
+    position: fixed;
+    z-index: 1000000;
+    top: 60px;
+    left: 168px;
+    background: #3498DB;
+    color: ghostwhite;
+    padding: 10px 20px;
+    border-radius: 0 10px 10px 0;
+    -moz-border-radius: 0 10px 10px 0;
+    -webkit-border-radius: 0 10px 10px 0;
+    -o-border-radius: 0 10px 10px 0;
+    border: 0 none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 1s;
+    height: 35px;
+}
+
+#searchButton:hover
+{
+    background: #2D85BF;
+    transition: none;
+}
+
+
+
+
+
+
+
+
+
+/* RESPONSIVE DESIGN -- Modifications faites lorsque la largeur de l'écran est comprise entre la valeur "min-width" et celle de "max-width" */
+@media screen and (min-width: 1060px)
+{
+    #search
+    {
+        position: relative;
+        top: 9px;
+        right: 20px;
+        float: right;
+    }
+
+    #searchBar
+    {
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin-right: 3px;
+    }
+
+    #searchButton
+    {
+        position: relative;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 880px)
+{
+    nav ul
+    {
+        margin: 0 0 0 40px;
+    }
+
+    nav ul li a
+    {
+        padding: 13px 10px;
+        font-size: 25px;
+    }
+}
+
+@media screen and (min-width: 510px) and (max-width: 650px)
+{
+    nav
+    {
+
+    }
+
+    nav ul li a
+    {
+        padding: 15px 5px;
+        font-size: 20px;
+    }
+}
+
+/* Mode menu vertical */
+@media screen and (min-width: 0px) and (max-width: 510px)
+{
+    body
+    {
+        top: 260px;
+    }
+
+    #background
+    {
+        top: 260px;
+        transition: 1s;
+    }
+
+    nav
+    {
+        position: relative;
+        float: top !important;
+        height: 260px;
+        border-bottom: 1px solid #FF8C00;
+    }
+
+    nav ul
+    {
+        margin: 0 0 0 5px;
+        width: 100%;
+    }
+
     nav ul li
     {
         text-align: center !important;
         float: none;
         display: block;
         width: 100%;
+        font-size: 0px;
     }
-    #background
+
+    nav ul li a
     {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 230px;
-        left: 0;
+        padding: 5px;
+        font-size: 30px;
+        transition: 1s;
+    }
+
+    nav ul li a:hover
+    {
+        color: #FF8C00;
+        background-color: transparent;
+    }
+
+    .c-hamburger
+    {
+        display: none;
+    }
+
+    #searchBar, #searchButton
+    {
+        display: none;
     }
 }
 
-
-/* Sous menu */
-nav ul ul
+.learnMoreButton
 {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: none !important;
-    position: absolute;
-    top: 35px;
-    left: 0;
-    z-index: 99999;
-    background: #444;
-    background: -moz-linear-gradient(#444, #111);
-    background: -webkit-gradient(linear,left bottom,left top,color-stop(0, #111),color-stop(1, #444));
-    background: -webkit-linear-gradient(#444, #111);
-    background: -o-linear-gradient(#444, #111);
-    background: -ms-linear-gradient(#444, #111);
-    background: linear-gradient(#444, #111);
-
-}
-
-nav ul li ul a
-{
-    padding: 10px;
-    height: auto;
-    line-height: 1;
     display: block;
-    white-space: nowrap;
-    float: none;
-    text-transform: none;
+    width: 100px;
+    line-height: 30px;
+    vertical-align: middle;
+    background-color: #5BC0DE;
+    transition: 1s;
+    border: none;
+    box-shadow: 0 0 10px ghostwhite, 0 0 10px  ghostwhite, 0 0 10px  ghostwhite;
+    cursor: pointer;
+    text-align: center;
 }
 
-nav ul li ul a:hover
+.learnMoreButton:hover
 {
-    background: #0186ba;
-    background: -moz-linear-gradient(#04acec,  #0186ba);
-    background: -webkit-gradient(linear, left top, left bottom, from(#04acec), to(#0186ba));
-    background: -webkit-linear-gradient(#04acec,  #0186ba);
-    background: -o-linear-gradient(#04acec,  #0186ba);
-    background: -ms-linear-gradient(#04acec,  #0186ba);
-    background: linear-gradient(#04acec,  #0186ba);
+    background-color: #31B0D5;
+    transition: none;
 }
 
-/* Importation de fonte annexe */
-@font-face
+.learnMoreButton a
 {
-    font-family: "Hemmet";
-    src: url('../font/Hemmet.ttf');
+    color: white;
+    text-decoration: none;
 }
+
+
+
+/* TYPES.HTML */
+section
+{
+    display: inline-block;
+}
+
+.sectionTypes
+{
+    width: 25%;
+    height: auto;
+    padding: 1%;
+    margin: 3%;
+    background-color: ghostwhite;
+    box-shadow: 0 0 10px 1px #ccc;
+}
+
+.sectionTypes img
+{
+    width: 50%;
+    height: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.sectionTypes p
+{
+    border: 1px solid #ccc;
+    padding: 5%;
+    text-align: center;
+}
+
+.sectionTypes button
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.sectionTypes:first-child
+{
+    margin-right: 0;
+}
+
+.sectionTypes:first-child
+{
+    margin-left: 0;
+}
+
 
 
 
